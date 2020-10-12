@@ -1,0 +1,39 @@
+<div class=" container">
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">{{titulo}}</h1>
+            <p class="lead">{{descripcion}}</p>
+        </div>
+    </div>
+
+    <form>
+        <div class="row">
+
+            <div class="form-group col-sm-6">
+                <label for="producto">Producto a comprar</label>
+                <input type="text" class="form-control" id="producto" #producto>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label for="tienda">Tienda</label>
+                <input type="text" class="form-control" id="tienda" #tienda>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="guardar(producto.value, tienda.value)">Agregar</button>
+
+    </form>
+
+    <!--
+    Este es el ul que pide, pero lo cambie por un nuevo componente
+
+    <ul>
+        <li *ngFor="let item of items">{{item.descripcion}} - {{item.tiendaDeCompra}}</li>
+    </ul>
+
+    -->
+    <app-item *ngFor="let item of items"[item]="item"></app-item>
+
+
+</div>
