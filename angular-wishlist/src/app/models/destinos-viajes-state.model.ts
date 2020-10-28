@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { DestinoViaje } from './destino-viaje.models';
 import { DestinosApiClient } from './destinos-api-client.model';
 import { HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // ESTADO
 export interface DestinosViajesState {
