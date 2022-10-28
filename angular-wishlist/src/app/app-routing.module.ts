@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DestinoDetalleComponent } from './components/destino-detalle/destino-detalle.component';
-import { ListaDestinoComponent } from './components/lista-destino/lista-destino.component';
+import { ListaDestinosComponent } from './components/lista-destinos/lista-destinos.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
 import { UsuarioLogueadoGuard } from './guards/usuario-logueado/usuario-logueado.guard';
@@ -19,7 +19,7 @@ export const childrenRoutesVuelos: Routes = [
 
 const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:'full'},
-  {path:'home', component: ListaDestinoComponent},
+  {path:'home', component: ListaDestinosComponent},
   {path:'destino/:id', component: DestinoDetalleComponent},
   { path: 'login', component: LoginComponent },
     {

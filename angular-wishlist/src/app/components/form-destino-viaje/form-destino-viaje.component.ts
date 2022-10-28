@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
-import { DestinoViaje } from '../../models/destino-viaje.models';
+import { DestinoViaje } from '../../models/destino-viaje.model';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 import { AppConfig, APP_CONFIG } from 'src/app/app.module';
@@ -23,11 +23,12 @@ export class FormDestinoViajeComponent implements OnInit {
               @Inject(forwardRef(() => APP_CONFIG)) private config: AppConfig) {
     this.onItemAdded = new EventEmitter();
     this.fg = fb.group({
-      nombre:['', Validators.compose([
+      nombre: ['', Validators.compose([
         Validators.required,
+        this.nombreValidator,
         this.nombreValidatorParametrizable(this.minLongitud)
       ])],
-      url:['']
+url: ['']
     });
 
     // this.fg.valueChanges.subscribe((form: any)=>{
@@ -63,17 +64,14 @@ export class FormDestinoViajeComponent implements OnInit {
     }
   }
 
-  nombreValidatorParametrizable(minLog: number): ValidatorFn{
-    return (control: FormControl): {[s:string]: boolean}| null =>{
-
-      const l= control.value.toString().trim().length;
-      if (l>0 && l<minLog) {
-        return {minLongNombre: true};
-      } else {
-        return null;
-      }
-
-    }
+  nombreValidatorParametrizable(minLong: number): ValidatorFn {
+      return (control: FormControl): { [key: string]: boolean } | null => {
+      const l = control.value.toString().trim().length;
+        if (l > 0 && l < minLong) {
+              return { 'minLongNombre': true };
+          }
+          return null;
+      };
   }
 
 

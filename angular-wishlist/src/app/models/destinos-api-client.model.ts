@@ -2,7 +2,7 @@ import { forwardRef, Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AppConfig, AppState, APP_CONFIG, db } from '../app.module';
-import { DestinoViaje } from './destino-viaje.models';
+import { DestinoViaje } from './destino-viaje.model';
 import { ElegidoFavoritoAction, NuevoDestinoAction } from './destinos-viajes-state.model';
 import { HttpRequest, HttpHeaders, HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 

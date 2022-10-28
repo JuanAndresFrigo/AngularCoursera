@@ -4,7 +4,7 @@ import { APP_INITIALIZER, Injectable, InjectionToken, NgModule } from '@angular/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DestinoViajeComponent } from './components/destino-viaje/destino-viaje.component';
-import { ListaDestinoComponent } from './components/lista-destino/lista-destino.component';
+import { ListaDestinosComponent } from './components/lista-destinos/lista-destinos.component';
 import { DestinoDetalleComponent } from './components/destino-detalle/destino-detalle.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule as NgRxStoreModule, ActionReducerMap, Store } from '@ngrx/store';
@@ -22,7 +22,7 @@ import {
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular/common/http';
 
-import { DestinoViaje } from './models/destino-viaje.models';
+import { DestinoViaje } from './models/destino-viaje.model';
 import { Observable, from } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { LoginComponent } from './components/login/login/login.component';
@@ -35,9 +35,13 @@ import { VuelosMasInfoComponent } from './components/vuelos/vuelos-mas-info/vuel
 import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
 import { ReservasModule } from './reservas/reservas.module';
 import { TranslateLoader,TranslateModule } from '@ngx-translate/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import Dexie from 'dexie';
+import { EspiameDirective } from './espiame.directive';
+import { TrackearClickDirective } from './trackear-click.directive';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+
 // app config
 export interface AppConfig {
   apiEndpoint: String;
@@ -141,24 +145,25 @@ class AppLoadService {
 /////////////
 
 
-//redux init
+// redux init
 export interface AppState {
   destinos: DestinosViajesState;
 }
+
 const reducers: ActionReducerMap<AppState> = {
   destinos: reducerDestinosViajes
 };
 
 const reducersInitialState = {
-  destinos: intializeDestinosViajesState()
+    destinos: intializeDestinosViajesState()
 };
-//fin redux init
+// fin redux init
 
 @NgModule({
   declarations: [
     AppComponent,
     DestinoViajeComponent,
-    ListaDestinoComponent,
+    ListaDestinosComponent,
     DestinoDetalleComponent,
     FormDestinoViajeComponent,
     LoginComponent,
@@ -167,9 +172,12 @@ const reducersInitialState = {
     VuelosMainComponent,
     VuelosMasInfoComponent,
     VuelosDetalleComponent,
+    EspiameDirective,
+    TrackearClickDirective,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -194,6 +202,7 @@ const reducersInitialState = {
           deps: [HttpClient]
       }
     }),
+    NgxMapboxGLModule,
 
   ],
   providers: [
